@@ -1,0 +1,12 @@
+from tkinter import *root = Tk()root.geometry("800x600")
+l1 = Label(text='вопрос')
+b1 = Button(width=20, height=3, text='ответ')
+b2 = Button(width=20, height=3, text='ответ')
+b3 = Button(width=20, height=3, text='ответ')
+b4 = Button(width=20, height=3, text='ответ')
+l1.pack()
+b1.pack()
+b2.pack()
+b3.pack()
+b4.pack()
+root.mainloop()
