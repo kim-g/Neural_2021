@@ -26,4 +26,4 @@ plt.plot(history.history['loss'])
 plt.grid(True)
 plt.show#выводим график
 print(model.get_weights())#выводим веса
-print(model.predict([1,1]))#место где происходит ошибка
+print(model.predict(np.array([[1,1]])))#место где происходит ошибка
