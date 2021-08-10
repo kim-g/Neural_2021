@@ -35,5 +35,5 @@ for i in input().split():#ввод
    m+=1
    if m == 2:
       m = 0
-      print(model.predict(np.array([[num2 ,num1]])))#вывод
+      print(np.round(model.predict(np.array([[num2 ,num1]]))))#вывод
    num2 = int(i)
