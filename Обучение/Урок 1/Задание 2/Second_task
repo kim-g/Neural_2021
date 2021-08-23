@@ -1,0 +1,41 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow import keras
+from tensorflow.keras.layers import Dense,Dropout
+from random import randint
+#генератор (ниже)
+xy = set()
+while len(xy) < 400:
+  a = (randint(-200, 200), randint(-2000, 2000))
+  if a[1] == a[0]*1.5-3 or a[1] == a[0]*-0.5+2:
+     continue
+  xy.add(a)#генерируем значения кординат
+xy = np.array(list(xy))
+answer = []
+for x in xy :
+    equation = x[0]*1.5-3
+    equation1 = x[0]*-0.5+2
+    if x[1]<equation and x[1]<equation1:
+       answer.append([1,0,0,0])
+    if x[1]<equation and x[1]>equation1:
+       answer.append([0,1,0,0])
+    if x[1]>equation and x[1]>equation1:
+       answer.append([0,0,1,0])
+    if x[1]>equation and x[1]<equation1:
+       answer.append([0,0,0,1])
+answer=np.array(answer)#генерируем ответы исходя из xy(всё от 13 строки)
+#нейронная сеть (ниже)
+model=keras.Sequential([
+   Dense(2, input_shape=(2,), activation='linear'),
+   Dense(4, activation='softmax')
+])#создаём стопку слоёв из 2-ух слоёв с 4-мя входами
+model.compile(loss='mean_squared_error', optimizer = keras.optimizers.SGD(learning_rate=0.01, momentum=0.0, nesterov=True))# модель нс
+history = model.fit( x=xy, y=answer, epochs = 80000, verbose=False)#обучаем
+plt.plot(history.history['loss'])
+plt.grid(True)
+plt.show#выводим график
+print(model.get_weights())#выводим веса
+#ввод (ниже)
+inp = list(map(int, input().split()))#ввод значений
+for num1, num2 in zip(inp[::2], inp[1::2]):
+    print(np.round(model.predict(np.array([[num2 ,num1]]))))#вывод
