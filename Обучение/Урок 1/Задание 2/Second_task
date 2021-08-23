@@ -36,6 +36,6 @@ plt.grid(True)
 plt.show#выводим график
 print(model.get_weights())#выводим веса
 #ввод (ниже)
-inp = list(map(int, input().split()))#ввод значений
+inp = list(map(int, input('введите 2 или более чисел через пробел :').split()))#ввод значений
 for num1, num2 in zip(inp[::2], inp[1::2]):
     print(np.round(model.predict(np.array([[num2 ,num1]]))))#вывод
