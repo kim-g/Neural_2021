@@ -38,7 +38,6 @@ print(model.get_weights())#выводим веса
 inp = list(map(int, input().split()))
 for num1, num2 in zip(inp[::2], inp[1::2]):#ввод значений
      a = model.predict(np.array([[num2 ,num1]]))
-     print(a,type(a))
      if a[0][0] > 0 and a[0][1] > 0:
         print(4)
      if a[0][0] < 0 and a[0][1] < 0:
@@ -47,3 +46,5 @@ for num1, num2 in zip(inp[::2], inp[1::2]):#ввод значений
         print(3)
      if a[0][1] < 0 and a[0][0] > 1:
         print(1)
+#выводы относительно заданных границ
+
