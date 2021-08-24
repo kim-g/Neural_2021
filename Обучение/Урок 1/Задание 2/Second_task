@@ -18,7 +18,7 @@ for x in xy :
     equation = x[0]*1.5-3
     equation1 = x[0]*-0.5+2
     answer.append([x[1]-equation,x[1]-equation1])
-answer=np.array(answer)#генерируем ответы исходя из xy(всё от 13 строки)
+answer=np.array(answer)#генерируем ответы исходя из xy(всё от 15 строки)
 
 #нейронная сеть (ниже)
 
