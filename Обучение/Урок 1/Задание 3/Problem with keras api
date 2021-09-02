@@ -56,6 +56,8 @@ plt.grid(True)
 plt.show#выводим график
 print(model.get_weights())#выводим веса
 
+#ввод
+
 inp = list(map(int, input().split()))
 for num1, num2 in zip(inp[::2], inp[1::2]): #ввод значений
    print(np.round(model.predict(np.array([[num2 ,num1]]))),model.predict(np.array([[num2 ,num1]])))
