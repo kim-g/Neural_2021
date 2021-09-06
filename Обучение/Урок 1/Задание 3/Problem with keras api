@@ -44,7 +44,7 @@ Inp = Input(shape=(xy.shape[1],))
 hidden11 = Dense(1, activation='linear')(Inp)    
 hidden11 = Dense(1, activation='relu')(Inp)
 merge1 = concatenate([hidden11])
-output = Dense(shape=answer.shape[1],activation="softmax")(hidden12)
+output = Dense(shape=answer.shape[1],activation="softmax")(merge1)
 #(ошибка на строку выше) ругается :
 #IndexError: tuple index out of range
 model = Model(inputs=Inp, outputs=output)#создаём стопку слоёв из 2-ух слоёв с 2-мя входами из которых один слой с разными активационными функциями
