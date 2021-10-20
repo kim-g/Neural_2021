@@ -72,3 +72,15 @@ print(model1.get_weights())#выводим веса
 print('\n# Оцениваем на тестовых данных')
 model1.evaluate(RGB_test, RGB_test_answer)
 
+#ввод данных
+inp = list(map(int, input().split()))
+a = []
+for num1, num2, num3 in zip(inp[0:],inp[1:],inp[2:]):#ввод значений
+   a = model1.predict(np.array([[num1,num2,num3]]))
+   if round(a[0][0])==1:
+      if round(a[0][1]) ==1:
+         print(1)
+      else:
+         print(0)
+   if round(a[0][0])==0:
+      print(0)
