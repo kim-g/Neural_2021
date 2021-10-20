@@ -1,0 +1,74 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from tensorflow import keras
+from tensorflow.keras.layers import Dense,Dropout
+from random import randint
+
+#генератор значений для нс
+
+RGB = set()
+RGB_answer = []
+while len(RGB)<5000:
+    a = (randint(0, 225), randint(0, 225), randint(0, 225))
+    RGB.add(a)
+RGB = np.array(list(RGB))
+for x in RGB:
+    if x[0] >128 :
+        if (x[1]-x[2])< 10 and x[1] < 115:
+            RGB_answer.append([1,1,1])
+        else:
+            RGB_answer.append([1,0,0])
+    else:
+        if (x[1]-x[2])< 10 and x[1] < 115:
+            RGB_answer.append([0,1,1])
+        else:
+            RGB_answer.append([0,0,0])
+print('выборка для нс : ',len(RGB_answer),'кол-во правильных ответов',RGB_answer.count([1,1,1]))
+RGB_answer = np.array(RGB_answer)
+RGB  = np.array(RGB)
+
+#генератор значений для тестовой выборки
+
+m = 1000000
+RGB_test = set()
+RGB_test_answer = []
+while len(RGB_test)<m:
+    a = (randint(0, 225), randint(0, 225), randint(0, 225))
+    RGB_test.add(a)
+RGB_test = np.array(list(RGB_test))
+for x in RGB_test:
+    if x[0] >128 :
+        if (x[1]-x[2])< 10 and x[1] < 115:
+            RGB_test_answer.append([1,1,1])
+        else:
+            RGB_test_answer.append([1,0,0])
+    else:
+        if (x[1]-x[2])< 10 and x[1] < 115:
+            RGB_test_answer.append([0,1,1])
+        else:
+            RGB_test_answer.append([0,0,0])
+print('тестовая выборка для нс',len(RGB_test_answer),'кол-во правильных ответов в тестовой выборке :',RGB_test_answer.count([1,1,1]))
+RGB_test=np.array(RGB_test)
+RGB_test_answer=np.array(RGB_test_answer)
+
+#нейронная сеть
+
+model1=keras.Sequential([
+   Dense(3, input_shape=(3,),activation='relu'),
+   Dense(6,activation='linear'),
+   Dense(12,activation='relu'),
+   Dense(6,activation='relu'),
+   Dense(3,activation='softmax')
+])#создаём стопку слоёв
+model1.compile(loss='mean_squared_error', optimizer = keras.optimizers.Adam(0.1), metrics=['accuracy'])#настраиваем модель нс
+history1 = model1.fit( x=RGB, y=RGB_answer, epochs = 500, verbose=False,validation_split=0.3)#обучаем
+plt.plot(history1.history['loss'])
+plt.grid(True)
+plt.show#выводим график
+print(model1.get_weights())#выводим веса
+
+# Оценим модель на тестовых данных, используя "evaluate"
+
+print('\n# Оцениваем на тестовых данных')
+model1.evaluate(RGB_test, RGB_test_answer)
+
