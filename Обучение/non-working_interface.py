@@ -1,12 +1,19 @@
-from tkinter import *root = Tk()root.geometry("800x600")
-l1 = Label(text='вопрос')
-b1 = Button(width=20, height=3, text='ответ')
-b2 = Button(width=20, height=3, text='ответ')
-b3 = Button(width=20, height=3, text='ответ')
-b4 = Button(width=20, height=3, text='ответ')
-l1.pack()
-b1.pack()
-b2.pack()
-b3.pack()
-b4.pack()
-root.mainloop()
+from tkinter import *
+
+import tkinter as tk
+import numpy as np
+
+
+class App:
+   def __init__(self):
+      self.num_of_question = 0
+      self.window = tk.Tk()
+      self.btn1 = Button(width='20', height='2')
+      self.btn2 = Button(width='20', height='2')
+      self.btn1.pack()
+      self.btn2.pack()
+      self.window.mainloop()
+
+
+
+m = App()
