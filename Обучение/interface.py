@@ -9,9 +9,8 @@ class GUI:
     def __init__(self):
         self.button_dict = dict()
         self.window = tk.Tk()
-        self.w, self.h = self.window.winfo_screenwidth(),self.window.winfo_screenheight()
-        self.window.geometry('%dx%d+0+0' % (self.w, self.h))
-
+        w, h = self.window.winfo_screenwidth(), self.window.winfo_screenheight()
+        self.window.geometry('%dx%d+0+0' % (w, h))
 
     def callback_function(self, x):
         self.OutVal = x
@@ -23,11 +22,9 @@ class GUI:
             return
 
         lbl = Label(text='\n'+Question+'\n')
-        lbl1 = Label(text=f'\n ответ номер : {num_of_question}/{Amount_of_answers[0][0]} \n', font='defult 19')
-        lbl2 = Label(text=f'\n осталось : {Amount_of_answers[0][0]-num_of_question}/{Amount_of_answers[0][0]} \n', font='defult 19')
+        lbl1 = Label(self.window, text=f'\n Ответ номер : {num_of_question}/{Amount_of_answers[0][0]} \n', font='defult 19')
+        lbl2 = Label(self.window, text=f'\n Осталось : {Amount_of_answers[0][0]-num_of_question}/{Amount_of_answers[0][0]} \n', font='defult 19')
         lbl.pack()
-        lbl1.place(x=(self.w-(self.w/4))-((self.w/4)/4)*3, y=self.h-(self.h/2))
-        lbl2.place(x=self.w/4, y=self.h-(self.h/2))
 
         for index, dat in enumerate(Answers):
             button = tk.Button(self.window, text=dat, command=lambda dat=dat,
@@ -35,6 +32,9 @@ class GUI:
             # кнопки номеруются сверху вниз
             button.pack()
             self.button_dict[dat] = button
+
+        lbl1.pack(padx=2, pady=2, expand=1, fill=tk.BOTH, side=RIGHT)
+        lbl2.pack(padx=2, pady=2, expand=1, fill=tk.BOTH, side=LEFT)
         self.window.mainloop()
 
         return self.OutVal
