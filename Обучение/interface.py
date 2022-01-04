@@ -67,7 +67,6 @@ class DATA: #собирает и выдаёт нужную информацию 
                continue
            self.Outvalue.append(a)
        self.Outvalue = np.array(self.Outvalue)
-       print(self.Outvalue)
 
    def Load(self):#выгружаем и переводим данные из sql таблицы в понятные программе
        result_table = self.cur.execute('SELECT * FROM question')
