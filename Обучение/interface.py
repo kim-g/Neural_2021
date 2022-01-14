@@ -18,8 +18,6 @@ class GUI:
 
     def Show(self, Question, Answers, Amount_of_answers, num_of_question):
         self.button_dict = dict()
-        if Question == None:
-            return
         row, column =self.window.grid_size()
 
         lbl = Label(text='\n'+Question+'\n')
@@ -61,10 +59,10 @@ class DATA: #собирает и выдаёт нужную информацию 
 
        for x in self.Queston_and_Button_answers:
            num_of_question += 1
+           if x.Question == None:
+               continue
            n = GUI()
            a = n.Show(x.Question, x.Button_answers, self.cur.execute('SELECT Count(question_text) FROM question').fetchall(), num_of_question)
-           if a == None:#игнорируем вывод None и незаписываем его в self.Outvalue
-               continue
            self.Outvalue.append(a)
        self.Outvalue = np.array(self.Outvalue)
 
