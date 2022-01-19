@@ -69,12 +69,9 @@ class DATA: #собирает и выдаёт нужную информацию 
    def Load(self):#выгружаем и переводим данные из sql таблицы в понятные программе
        result_table = self.cur.execute('SELECT * FROM question')
        for question in result_table.fetchall():
-           answers = self.cur.execute(f'SELECT answer FROM answers_for_buttons WHERE id_of_question ={question[0]}')
            Quest = Sql_decode()
            Quest.Question = question[1]
 
-           for answer in answers.fetchall() :
-               Quest.Button_answers.append(answer[0])
 
            self.Queston_and_Button_answers.append(Quest)
 
@@ -82,7 +79,7 @@ class DATA: #собирает и выдаёт нужную информацию 
 
 class Sql_decode:
     def __init__(self):
-        self.Button_answers = []
+        self.Button_answers = ['да', 'скорее да', 'скорее нет', 'нет']
         self.Question = ''
 
 
