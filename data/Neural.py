@@ -1,5 +1,6 @@
 import numpy as np
 import pathlib
+from tensorflow import keras
 
 
 class NN:
@@ -10,7 +11,7 @@ class NN:
     def create(self):
         pass
     def Load(self):#загрузка
-        self._model= load_model(self._path.joinpath(__class__.__name__))
+        self._model = keras.load_model(self._path.joinpath(__class__.__name__))
     def Save(self):
         self._model.safe(self._path)
 
