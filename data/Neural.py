@@ -11,8 +11,13 @@ class NN:
     def create(self):
         pass
     def Load(self):#загрузка
-        self._model = keras.load_model(self._path.joinpath(__class__.__name__))
+        self._model = keras.load_model(self._path.joinpath(__class__.__name__+'.h5'))
     def Save(self):
-        self._model.safe(self._path)
+        self._model = keras.save(__class__.__name__+'.h5')
+        #сохраняет все:
+        #    Значения весов
+        #    Конфигурацию модели (архитектуру)
+        #    Конфигурацию оптимизатора
+
 
 m = NN()
