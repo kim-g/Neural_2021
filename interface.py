@@ -1,5 +1,5 @@
 from tkinter import *
-
+from data import Neural
 import tkinter as tk
 import numpy as np
 import sqlite3
@@ -65,6 +65,7 @@ class DATA: #собирает и выдаёт нужную информацию 
            a = n.Show(x.Question, x.Button_answers, self.cur.execute('SELECT Count(question_text) FROM question').fetchall(), num_of_question)
            self.Outvalue.append(a)
        self.Outvalue = np.array(self.Outvalue)
+       return self.Outvalue
 
    def Load(self):#выгружаем и переводим данные из sql таблицы в понятные программе
        result_table = self.cur.execute('SELECT * FROM question')
@@ -88,4 +89,11 @@ class Sql_decode:
 
 m = DATA()
 m.Load()
-m.DATA_COLLECT()
+answers = m.DATA_COLLECT()
+N = Neural
+N.NN1.craete(answers,)
+N.NN2.craete(answers,)
+N.NN3.craete(answers,)
+N.NN4.craete(answers,)
+N.NN5.craete(answers,)
+
